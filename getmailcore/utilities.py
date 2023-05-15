@@ -298,7 +298,10 @@ def deliver_maildir(maildirpath, data, hostname, dcount=None, filemode=0o600):
         t = time.time()
         info['secs'] = int(t)
         info['usecs'] = int((t - int(t)) * 1000000)
-        info['unique'] = 'M%(usecs)dP%(pid)s' % info
+        #knagano add zero padding to msec and pid in filename to keep sort order of the filenames
+        #info['unique'] = 'M%(usecs)dP%(pid)s' % info
+        info['unique'] = 'M%(usecs)06dP%(pid)05d' % info
+        #/knagano
         if info['deliverycount'] is not None:
             info['unique'] += 'Q%(deliverycount)s' % info
         info['unique'] += 'R%s' % secrets.token_hex(8)
