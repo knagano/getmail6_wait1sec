@@ -284,6 +284,14 @@ def go(configs, idle, only_account=[]):
                                     break
 
                             if msg is not None:
+
+                                #knagano wait at least 1sec to keep sort order of the filenames
+                                time_before = time.time()
+                                time.sleep(1.01)
+                                while ((time.time() - time_before) < 1.0):
+                                    time.sleep(.01)
+                                #/knagano
+
                                 r = destination.deliver_message(msg,
                                     options['delivered_to'], options['received']==True and msgid)
                                 log.debug('    delivered to %s\n' % r)
