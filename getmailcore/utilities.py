@@ -502,10 +502,13 @@ def expand_user_vars(s):
 def localhostname():
     '''Return a name for localhost which is (hopefully) the "correct" FQDN.
     '''
+    #knagano just use gethostname (getfqdn gives me garbage)
     n = socket.gethostname()
-    if '.' in n:
-        return n
-    return socket.getfqdn()
+    return n
+    #if '.' in n:
+    #    return n
+    #return socket.getfqdn()
+    #/knagano
 
 #######################################
 def check_ssl_key_and_cert(conf):
